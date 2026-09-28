@@ -1,11 +1,13 @@
 services:
   app:
     build: .
-    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     working_dir: /var/www/html
     volumes:
       - .:/var/www/html
-      - /var/www/html/vendor 
+      - /var/www/html/vendor
+      - /var/www/html/node_modules
+      - /var/www/html/storage
+      - /var/www/html/bootstrap/cache
     ports:
       - "8000:8000"
     command: sh -c "composer install --no-interaction && php artisan serve --host=0.0.0.0 --port=8000"
@@ -14,7 +16,6 @@ services:
 
   vite:
     image: node:22-alpine
-    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     working_dir: /var/www/html
     volumes:
       - .:/var/www/html
