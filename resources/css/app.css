@@ -1,0 +1,289 @@
+@import 'tailwindcss';
+
+@source '../views';
+
+@font-face {
+    font-family: 'TinyUnicode';
+    src: url('../fonts/TinyUnicode.ttf') format('truetype');
+    font-display: swap;
+}
+
+/* Design tokens: change these to re-theme the whole site.
+   Each token generates utilities (bg-surface, text-ink, border-line, ...). */
+@theme {
+    --font-sans: 'TinyUnicode', ui-sans-serif, system-ui, sans-serif;
+    --font-display: var(--font-sans);
+
+    --color-bg: #0b0d14;
+    --color-surface: #141824;
+    --color-line: #262c3d;
+    --color-ink: #eef1f8;
+    --color-muted: #9aa3b8;
+    --color-accent: #ff3cac;
+    --color-accent-ink: #0b0d14;
+
+    --radius-card: 0.75rem;
+}
+
+@layer base {
+    body {
+        @apply bg-bg text-ink;
+        font-family: 'TinyUnicode', ui-sans-serif, system-ui, sans-serif;
+        font-size: 32px;
+        font-weight: 400;
+        line-height: 0.9;
+        -webkit-font-smoothing: none;
+        -moz-osx-font-smoothing: auto;
+    }
+    body * {
+        font-size: 32px !important;
+        font-weight: 400 !important;
+        line-height: 0.9 !important;
+    }
+    body .markdown code,
+    body .markdown pre,
+    body .markdown pre code {
+        line-height: 1.1 !important;
+    }
+    body .markdown th {
+        background: var(--color-surface) !important;
+        color: var(--color-ink) !important;
+        font-weight: 400 !important;
+    }
+    a { @apply transition-colors; }
+    body header,
+    body footer {
+        border-width: 0 !important;
+        border-color: var(--color-line) !important;
+    }
+    body header { border-bottom-width: 4px !important; }
+    body footer { border-top-width: 4px !important; }
+    body .wishlist-button {
+        color: var(--color-accent) !important;
+        background: var(--color-bg) !important;
+        border-color: var(--color-accent) !important;
+        box-shadow: 4px 4px 0 var(--color-accent) !important;
+    }
+    body .wishlist-button:hover {
+        filter: brightness(1.12) !important;
+        box-shadow: 6px 6px 0 var(--color-accent) !important;
+    }
+    body .wishlist-button:active {
+        box-shadow: 2px 2px 0 var(--color-accent) !important;
+    }
+}
+
+@utility container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility btn {
+    @apply inline-flex items-center justify-center rounded-lg px-5 py-2.5 text-sm font-semibold transition;
+}
+
+@utility btn-primary {
+    @apply btn bg-accent text-accent-ink hover:brightness-110;
+}
+
+@utility btn-ghost {
+    @apply btn border border-line text-ink hover:bg-surface;
+}
+
+@utility card {
+    @apply rounded-card border border-line bg-surface p-6;
+}
+
+/* Rendered Markdown */
+@layer components {
+    .card,
+    .post-card,
+    .btn,
+    .btn-primary,
+    .btn-ghost {
+        border-radius: 0 !important;
+        border-style: solid !important;
+        border-width: 4px !important;
+    }
+
+    .card {
+        box-shadow: 4px 4px 0 var(--color-line);
+    }
+
+    .post-card {
+        border-color: var(--color-line);
+        box-shadow: 4px 4px 0 var(--color-line);
+    }
+
+    .btn-primary {
+        border-color: var(--color-accent);
+        box-shadow: 4px 4px 0 var(--color-accent);
+    }
+
+    .btn-ghost {
+        border-color: var(--color-line);
+        box-shadow: 4px 4px 0 var(--color-line);
+    }
+
+    .btn,
+    .btn-primary,
+    .btn-ghost {
+        transition-duration: 0.12s !important;
+        transition-timing-function: steps(2, end) !important;
+    }
+
+    .btn:hover,
+    .btn-primary:hover,
+    .btn-ghost:hover {
+        transform: translate(-2px, -2px);
+        filter: brightness(1.12);
+    }
+
+    .btn-primary:hover { box-shadow: 6px 6px 0 var(--color-accent); }
+    .btn-ghost:hover { box-shadow: 6px 6px 0 var(--color-line); }
+
+    .btn:active,
+    .btn-primary:active,
+    .btn-ghost:active {
+        transform: translate(2px, 2px);
+    }
+
+    .btn-primary:active { box-shadow: 2px 2px 0 var(--color-accent); }
+    .btn-ghost:active { box-shadow: 2px 2px 0 var(--color-line); }
+
+    .wishlist-button {
+        background: var(--color-surface);
+        color: var(--color-accent);
+        border-color: var(--color-accent);
+        box-shadow: 4px 4px 0 var(--color-accent);
+    }
+    .wishlist-button:hover { box-shadow: 6px 6px 0 var(--color-accent); }
+    .wishlist-button:active { box-shadow: 2px 2px 0 var(--color-accent); }
+
+    .markdown { @apply text-base leading-relaxed text-muted; }
+    .markdown,
+    .markdown * {
+        -webkit-font-smoothing: none;
+        -moz-osx-font-smoothing: auto;
+        text-rendering: optimizeSpeed;
+        font-kerning: none;
+        font-variant-ligatures: none;
+    }
+    .markdown > * + * { @apply mt-5; }
+    .markdown h1, .markdown h2, .markdown h3 { @apply font-display font-bold text-ink mt-10; }
+    .markdown h1 { @apply text-3xl; }
+    .markdown h2 { @apply text-2xl; }
+    .markdown h3 { @apply text-xl; }
+    .markdown a { @apply text-accent underline underline-offset-2 hover:brightness-125; }
+    .markdown ul { @apply list-disc pl-6; }
+    .markdown ol { @apply list-decimal pl-6; }
+    .markdown img { @apply h-auto max-w-full rounded-card; }
+    .markdown iframe {
+        @apply aspect-video h-auto w-full;
+        border: 0;
+    }
+    .markdown input[type='checkbox'] {
+        appearance: none;
+        display: inline-grid;
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+        place-content: center;
+        vertical-align: middle;
+        border: 2px solid var(--color-line);
+        background: var(--color-bg);
+        box-shadow: 2px 2px 0 var(--color-line);
+        opacity: 1;
+    }
+    .markdown input[type='checkbox']:checked {
+        border-color: var(--color-accent);
+        background: transparent;
+        box-shadow: 2px 2px 0 var(--color-accent);
+    }
+    .markdown input[type='checkbox']:checked::after {
+        content: '';
+        width: 2px;
+        height: 2px;
+        background: var(--color-accent);
+        box-shadow:
+            2px 2px 0 var(--color-accent),
+            4px 0 0 var(--color-accent),
+            6px -2px 0 var(--color-accent),
+            8px -4px 0 var(--color-accent);
+        transform: translate(-5px, 2px);
+    }
+    .markdown code,
+    .markdown pre {
+        font-family: 'TinyUnicode', ui-sans-serif, system-ui, sans-serif !important;
+        line-height: 1.1 !important;
+        border-radius: 0;
+        border: 4px solid var(--color-line);
+        box-shadow: 4px 4px 0 var(--color-line);
+    }
+    .markdown code {
+        background: var(--color-surface);
+    }
+    .markdown pre {
+        background: var(--color-bg);
+    }
+    .markdown table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: 4px solid var(--color-line);
+        box-shadow: 4px 4px 0 var(--color-line);
+    }
+    .markdown th,
+    .markdown td {
+        padding: 12px 16px;
+        border-right: 4px solid var(--color-line);
+        border-bottom: 4px solid var(--color-line);
+        text-align: left;
+    }
+    .markdown th {
+        background: var(--color-surface);
+        color: var(--color-ink);
+        border-color: var(--color-line);
+    }
+    .markdown tr > *:last-child { border-right: 0; }
+    .markdown tbody tr:last-child > * { border-bottom: 0; }
+    .markdown ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    .markdown ul > li {
+        position: relative;
+        padding-left: 20px;
+    }
+    .markdown ul > li::before {
+        content: '';
+        position: absolute;
+        top: 14px;
+        left: 0;
+        width: 6px;
+        height: 6px;
+        background: var(--color-accent);
+        box-shadow: 2px 2px 0 var(--color-line);
+    }
+    .markdown blockquote { @apply border-l-4 border-line pl-4 text-muted; }
+    .markdown code {
+        @apply bg-surface px-1.5 py-0.5 text-sm;
+        line-height: 1.1 !important;
+        border: 4px solid var(--color-line);
+        border-radius: 0;
+        box-shadow: 4px 4px 0 var(--color-line);
+    }
+    .markdown pre {
+        @apply overflow-x-auto bg-surface p-4 text-sm;
+        line-height: 1.1 !important;
+        padding-block: 8px;
+        border: 4px solid var(--color-line);
+        border-radius: 0;
+        box-shadow: 4px 4px 0 var(--color-line);
+    }
+    .markdown pre code {
+        @apply bg-transparent p-0;
+        border: 0;
+        box-shadow: none;
+    }
+    .markdown hr { @apply border-line; }
+}
