@@ -12,17 +12,11 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
+          username: ${{ secrets.VPS_USER }} # This will be 'root'
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/deploy/moonbaza-phase1
-            
-            # Fetch the latest code and force it to match GitHub exactly
+            cd /var/www/moonbaza.com
             git fetch origin main
             git reset --hard origin/main
-            
-            # Rebuild and restart the containers
             docker compose up -d --build
-            
-            # Clean up old dangling images to save disk space
             docker image prune -f
