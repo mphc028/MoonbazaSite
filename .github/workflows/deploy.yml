@@ -1,0 +1,28 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to VPS via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/deploy/moonbaza-phase1
+            
+            # Fetch the latest code and force it to match GitHub exactly
+            git fetch origin main
+            git reset --hard origin/main
+            
+            # Rebuild and restart the containers
+            docker compose up -d --build
+            
+            # Clean up old dangling images to save disk space
+            docker image prune -f
