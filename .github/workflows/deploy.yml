@@ -23,31 +23,13 @@ jobs:
           port: ${{ secrets.VPS_PORT || 22 }}
           script_stop: true
           script: |
-            set -e
+            set -eu
             cd /var/www/moonbaza.com
-            git pull --ff-only origin main
+            git config --global --add safe.directory /var/www/moonbaza.com || true
+            git fetch origin main
+            git reset --hard origin/main
             rm -f public/hot
             docker compose run --rm --no-deps vite sh -c "npm install && npm run build"
             docker compose up -d app
-            docker compose exec -T app php artisan optimizename: Deploy to VPS
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to VPS via SSH
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }} # This will be 'root'
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /var/www/moonbaza.com
-            git fetch origin main
-            git reset --hard origin/main
-            docker compose up -d --build
-            docker image prune -f
+            until docker compose exec -T app php artisan about >/dev/null 2>&1; do sleep 2; done
+            docker compose exec -T app php artisan optimize
