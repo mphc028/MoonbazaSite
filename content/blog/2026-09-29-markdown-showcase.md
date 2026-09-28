@@ -5,6 +5,7 @@ excerpt: "A quick tour of the Markdown features available in the Moonbaza devlog
 published: true
 ---
 
+This is a change
 This article is a small reference for writing posts on Moonbaza. Everything below is written in Markdown.
 
 ## Text and links
