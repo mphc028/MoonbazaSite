@@ -4,10 +4,6 @@ services:
     working_dir: /var/www/html
     volumes:
       - .:/var/www/html
-      - /var/www/html/vendor
-      - /var/www/html/node_modules
-      - /var/www/html/storage
-      - /var/www/html/bootstrap/cache
     ports:
       - "8000:8000"
     command: sh -c "mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views bootstrap/cache && composer install --no-interaction && php artisan serve --host=0.0.0.0 --port=8000"
@@ -19,7 +15,6 @@ services:
     working_dir: /var/www/html
     volumes:
       - .:/var/www/html
-      - /var/www/html/node_modules
     ports:
       - "5173:5173"
     command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
