@@ -6,4 +6,5 @@ published: true
 ---
 Welcome to the official Moonbaza website and devlog.
 
-Here I'll share progress, ideas and behind-the-scenes notes as the game takes shape.
+Here I'll share progress, ideas and behind-the-scenes notes as the game takes shape. 
+

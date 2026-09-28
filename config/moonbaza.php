@@ -2,7 +2,7 @@
 
 return [
     'name' => 'Moonbaza',
-    'tagline' => 'Space shooter. Bullet hell. Survive the void.',
+    'tagline' => 'A game developed by wade028',
 
     // Where the markdown content lives, relative to the project root
     // (or an absolute path inside the container).
