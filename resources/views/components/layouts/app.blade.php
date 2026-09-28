@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $fullTitle }}</title>
     <meta name="description" content="{{ $desc }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon.png') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('images/favicon.svg') }}">
     <link rel="canonical" href="{{ url()->current() }}">
     <meta property="og:site_name" content="{{ config('moonbaza.name') }}">
     <meta property="og:type" content="website">
