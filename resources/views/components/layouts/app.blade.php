@@ -21,7 +21,14 @@
     @endif
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="font-loading min-h-screen flex flex-col">
+    <div class="site-loader" role="status" aria-live="polite">
+        <div class="site-loader__content">
+            <span class="site-loader__label" aria-label="Loading">
+                <span>L</span><span>o</span><span>a</span><span>d</span><span>i</span><span>n</span><span>g</span>
+            </span>
+        </div>
+    </div>
     <header class="border-b border-line">
         <div class="container-page flex h-16 items-center justify-between gap-6">
             <a href="/" aria-label="{{ config('moonbaza.name') }}">
@@ -62,4 +69,7 @@
         </div>
     </footer>
 </body>
+<script>
+    setTimeout(() => document.body.classList.replace('font-loading', 'font-ready'), 500);
+</script>
 </html>

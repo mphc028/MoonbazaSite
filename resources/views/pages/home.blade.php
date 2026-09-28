@@ -3,7 +3,7 @@
         <img
             src="{{ asset('images/moonbaza-logo.png') }}"
             alt="{{ config('moonbaza.name') }}"
-            class="mx-auto h-20 w-auto"
+            class="home-logo mx-auto"
         >
         @if ($page->tagline)
             <p class="mx-auto mt-4 max-w-xl text-lg text-muted">{{ $page->tagline }}</p>

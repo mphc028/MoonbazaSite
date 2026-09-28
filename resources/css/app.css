@@ -5,7 +5,7 @@
 @font-face {
     font-family: 'TinyUnicode';
     src: url('../fonts/TinyUnicode.ttf') format('truetype');
-    font-display: swap;
+    font-display: block;
 }
 
 /* Design tokens: change these to re-theme the whole site.
@@ -58,6 +58,45 @@
     }
     body header { border-bottom-width: 4px !important; }
     body footer { border-top-width: 4px !important; }
+    body.font-loading > :not(.site-loader) { visibility: hidden; }
+    body.font-ready > .site-loader { display: none !important; }
+    .site-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        background: var(--color-bg);
+        color: var(--color-accent);
+        font-size: 32px !important;
+        line-height: 1 !important;
+    }
+    .site-loader__content { text-align: center; }
+    .site-loader__label {
+        display: block;
+        font-size: 32px !important;
+    }
+    .site-loader__label span {
+        display: inline-block;
+        font-size: 32px !important;
+        animation: loader-letter 0.32s steps(2, end) infinite;
+    }
+    .site-loader__label span:nth-child(2) { animation-delay: 0.04s; }
+    .site-loader__label span:nth-child(3) { animation-delay: 0.08s; }
+    .site-loader__label span:nth-child(4) { animation-delay: 0.12s; }
+    .site-loader__label span:nth-child(5) { animation-delay: 0.16s; }
+    .site-loader__label span:nth-child(6) { animation-delay: 0.20s; }
+    .site-loader__label span:nth-child(7) { animation-delay: 0.24s; }
+    .home-logo {
+        width: min(80vw, 560px);
+        height: auto;
+        max-width: 100%;
+        object-fit: contain;
+    }
+    @keyframes loader-letter {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-8px); }
+    }
     body .wishlist-button {
         color: var(--color-accent) !important;
         background: var(--color-bg) !important;
