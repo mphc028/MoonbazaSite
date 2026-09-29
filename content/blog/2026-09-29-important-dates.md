@@ -35,7 +35,7 @@ This post serves as a roadmap for the development of **Moonbaza**. As the projec
 
 ## Phase 2: Alpha (Core Mechanics)
 
-This phase is all about getting the game playable. The focus is on the feel of the movement, combat, and core systems. There will be also so
+This phase is all about getting the game playable. The focus is on the feel of the movement, combat, and core systems.
 
 - [ ] TBD
 
