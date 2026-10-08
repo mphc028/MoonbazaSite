@@ -1,21 +1,23 @@
 <x-layouts.app :description="$page->description">
-    <section class="container-page py-24 text-center">
-        <img
-            src="{{ asset('images/moonbaza-logo.png') }}"
-            alt="{{ config('moonbaza.name') }}"
-            class="home-logo mx-auto"
-        >
-        @if ($page->tagline)
-            <p class="mx-auto mt-4 max-w-xl text-lg text-muted">{{ $page->tagline }}</p>
-        @endif
-        <div class="mt-8 flex justify-center gap-3">
-            <a href="{{ config('moonbaza.cta.url') }}" class="btn-primary wishlist-button">{{ config('moonbaza.cta.label') }}</a>
-            <a href="{{ route('blog.index') }}" class="btn-ghost">Devlog</a>
+    <section class="home-hero" style="--hero-wallpaper: url('{{ asset('images/wallpaper.png') }}')">
+        <div class="home-hero__content">
+            <div class="home-logo-wave" role="img" aria-label="Moonbaza">
+                @foreach (range(1, 8) as $segment)
+                    <img src="{{ asset(sprintf('images/%02d.png', $segment)) }}" alt="" aria-hidden="true">
+                @endforeach
+            </div>
+            @if ($page->tagline)
+                <p class="home-hero__tagline">{{ $page->tagline }}</p>
+            @endif
+            <div class="home-hero__actions">
+                <a href="{{ config('moonbaza.cta.url') }}" class="btn-primary wishlist-button">{{ config('moonbaza.cta.label') }}</a>
+                <a href="{{ route('blog.index') }}" class="btn-ghost">Devlog</a>
+            </div>
         </div>
     </section>
 
     @if ($page->body)
-        <section class="container-page pb-16">
+        <section class="container-page pt-12 pb-16">
             <div class="markdown mx-auto max-w-3xl">{!! \App\Content::markdown($page->body) !!}</div>
         </section>
     @endif

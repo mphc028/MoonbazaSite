@@ -87,11 +87,93 @@
     .site-loader__label span:nth-child(5) { animation-delay: 0.16s; }
     .site-loader__label span:nth-child(6) { animation-delay: 0.20s; }
     .site-loader__label span:nth-child(7) { animation-delay: 0.24s; }
-    .home-logo {
-        width: min(80vw, 560px);
+    body .home-hero {
+        position: relative;
+        display: grid;
+        min-height: clamp(520px, calc(100svh - 128px), 850px);
+        place-items: center;
+        overflow: hidden;
+        padding: 64px 24px;
+        background-color: #000;
+        background-image: linear-gradient(90deg, rgb(0 0 0 / 18%), rgb(0 0 0 / 4%)), var(--hero-wallpaper);
+        background-position: center;
+        background-size: cover;
+        text-align: center;
+    }
+    body .home-hero__content {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+    }
+    body .home-logo-wave {
+        display: flex;
+        width: min(100%, 880px);
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        filter: drop-shadow(0 8px 0 rgb(0 0 0 / 45%));
+    }
+    body .home-logo-wave img {
+        display: block;
+        width: 12.5%;
         height: auto;
-        max-width: 100%;
-        object-fit: contain;
+        flex: 0 1 12.5%;
+        margin-right: clamp(-10px, -0.65vw, -4px);
+        image-rendering: pixelated;
+        animation: logo-wave 2s ease-in-out infinite;
+    }
+    body .home-logo-wave img:last-child { margin-right: 0; }
+    body .home-logo-wave img:nth-child(2) { animation-delay: -0.18s; }
+    body .home-logo-wave img:nth-child(3) { animation-delay: -0.36s; }
+    body .home-logo-wave img:nth-child(4) { animation-delay: -0.54s; }
+    body .home-logo-wave img:nth-child(5) { animation-delay: -0.72s; }
+    body .home-logo-wave img:nth-child(6) { animation-delay: -0.9s; }
+    body .home-logo-wave img:nth-child(7) { animation-delay: -1.08s; }
+    body .home-logo-wave img:nth-child(8) { animation-delay: -1.26s; }
+    body .home-hero__tagline {
+        max-width: 640px;
+        margin: 0;
+        padding: 8px 16px;
+        color: var(--color-ink);
+        font-size: 32px !important;
+        line-height: 1.25 !important;
+        text-shadow: 3px 3px 0 #000;
+    }
+    body .home-hero__actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+    body .home-hero__actions .btn-primary,
+    body .home-hero__actions .btn-ghost {
+        min-width: 180px;
+        padding: 12px 24px;
+        font-size: 32px !important;
+        line-height: 0.9 !important;
+    }
+    @keyframes logo-wave {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-14px); }
+    }
+    @media (max-width: 640px) {
+        body .home-hero {
+            min-height: max(520px, calc(100svh - 112px));
+            padding: 48px 18px;
+            background-position: 58% center;
+        }
+        body .home-hero__content { gap: 24px; }
+        body .home-logo-wave img { margin-right: -5px; }
+        body .home-hero__actions { width: min(100%, 280px); flex-direction: column; gap: 16px; }
+        body .home-hero__actions .btn-primary,
+        body .home-hero__actions .btn-ghost { width: 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        body .home-logo-wave img { animation: none; }
     }
     @keyframes loader-letter {
         0%, 100% { transform: translateY(0); }
