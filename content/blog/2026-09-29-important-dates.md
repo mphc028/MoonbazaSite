@@ -50,5 +50,5 @@ Expanding the game with more content, balancing encounters, and preparing for ex
 Getting ready to share Moonbaza with the world!
 
 - [ ] TBD
-.
+
 ---
